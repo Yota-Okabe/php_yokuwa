@@ -1,3 +1,9 @@
+<?php
+
+    session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -14,11 +20,10 @@
 </header>
 
 <main>
-<h2>practice</h2>
+<h2>セッションに値を保存</h2>
 <pre>
-<!-- $valueは運ばれてこないが、cookieは運ばれてくる -->
-変数の値： <?php print($value); ?>
-Cookieの値： <?php print($_COOKIE['save_message']); ?>
+    セッションの値：<?php echo $_SESSION['session_message']; ?>
+    <?php session_unset(); ?>
 </pre>
 </main>
 </body>

@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    $_SESSION['session_message'] = 'セッションに値を保存した';
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -14,11 +19,10 @@
 </header>
 
 <main>
-<h2>practice</h2>
+<h2>セッションに値を保存</h2>
 <pre>
-<!-- $valueは運ばれてこないが、cookieは運ばれてくる -->
-変数の値： <?php print($value); ?>
-Cookieの値： <?php print($_COOKIE['save_message']); ?>
+セッションに値を保存しました。次のページに異動して確認しよう。
+&raquo;<a href="page02.php">Page02へ</a>
 </pre>
 </main>
 </body>

@@ -1,3 +1,10 @@
+<?php
+
+    $value = '変数に保存した値';
+    setcookie('save_message', 'Cookieに保存した値', time() + 60 * 60 * 12);
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -14,11 +21,10 @@
 </header>
 
 <main>
-<h2>practice</h2>
+<h2>Cookieに値を保存する</h2>
 <pre>
-<!-- $valueは運ばれてこないが、cookieは運ばれてくる -->
-変数の値： <?php print($value); ?>
-Cookieの値： <?php print($_COOKIE['save_message']); ?>
+Cookieに値を保存しました。次のページに移動してみましょう。
+&raquo; <a href="page02.php">Page02へ</a>
 </pre>
 </main>
 </body>
