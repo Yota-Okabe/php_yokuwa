@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>よくわかるphpの教科書</title>
 </head>
 
@@ -14,14 +14,13 @@
 </header>
 
 <main>
-<h2>Cookieに値を保存する</h2>
-<pre>
+<h2>practice</h2>
+ご予約日：
 <?php
-
-    
-
+foreach ($_POST['reserve'] as $reserve) {
+    echo htmlspecialchars($reserve, ENT_QUOTES) . ', ';
+}
 ?>
-</pre>
 </main>
 </body>
 </html>

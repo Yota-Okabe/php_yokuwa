@@ -14,11 +14,17 @@
 </header>
 
 <main>
-<h2>Cookieに値を保存する</h2>
+<h2>practice</h2>
 <pre>
 <?php
 
-    
+$zip = '987-6543';
+$zip = mb_convert_kana($zip, 'a', 'UTF-8');
+if (preg_match("/\A\d{3}[-]\d{4}\z/", $zip)) {
+    echo '郵便番号： 〒' . $zip;
+} else {
+    echo '郵便番号を 123-4567 の形式で記入してください';
+}
 
 ?>
 </pre>
