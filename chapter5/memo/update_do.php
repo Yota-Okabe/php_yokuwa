@@ -16,24 +16,16 @@
 </header>
 
 <main>
-<h2>practice</h2>
+<h2>Practice</h2>
 <?php
 
-// $memos = $db->query('SELECT * FROM memos WHERE id=1');
-// $memo = $memos->fetch();
-$memos = $db->prepare('SELECT * FROM memos WHERE id=?');
-$memos->execute(array($_REQUEST['id']));
-$memo = $memos->fetch();
+$statement = $db->prepare('UPDATE memos SET memo=? WHERE id=?');
+$statement->execute(array($_POST['memo'], $_POST['id']));
 
 ?>
-<article>
-    <pre><?php echo$memo['memo']; ?></pre>
-    <a href="update.php?id=<?php echo $memo['id'] ?>">編集する</a>
-    |
-    <a href="delete.php?id=<?php echo $memo['id'] ?>">削除する</a>
-    |
-    <a href="index.php">戻る</a>
-</article>
+
+<p>メモの内容を変更しました</p>
+<p><a href="index.php">戻る</a></p>
 </main>
 </body>
 </html>

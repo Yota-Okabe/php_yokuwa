@@ -19,6 +19,17 @@
 <h2>practice</h2>
 <article>
 
+<?php
+if (isset($_REQUEST['page']) && is_numeric($_REQUEST['page'])) {
+    $page = $_REQUEST['page'];
+} else {
+    $page = 1;
+}
+$start = 5 * ($page - 1);
+$memos = $db->prepare('SELECT * FROM memos ORDER BY id LIMIT ?, 5');
+$memos->bindParam(1, $start, PDO::PARAM_INT);
+$memos->execute();
+?>
 <?php while ($memo = $memos->fetch()): ?> 
     <?php if ((mb_strlen($memo['memo'])) > 50): ?>
         <p><a href="memo.php?id=<?php echo $memo['id']; ?>"><?php echo mb_substr($memo['memo'], 0, 50); ?>...</a></p>
@@ -28,6 +39,20 @@
     <time><?php echo $memo['created_at']; ?></time>
     <hr>
 <?php endwhile; ?>
+
+<?php if ($page >= 2): ?>
+    <a href="index.php?page=<?php echo $page-1; ?>"><?php echo $page-1 ?>ページ目へ</a>
+<?php endif; ?>
+    |
+<?php
+$counts = $db->query('SELECT COUNT(*) AS cnt FROM memos');
+$count = $counts->fetch();
+$max_page = ceil($count['cnt'] / 5);
+if ($page < $max_page) :
+?>
+    <a href="index.php?page=<?php echo $page+1; ?>"><?php echo $page+1 ?>ページ目へ</a>
+<?php endif; ?>
+</article>
 
 <!-- 以下は上記プログラミングを三項演算子で記述したもの -->
 <?php /*while ($memo = $memos->fetch()): ?> 
@@ -41,7 +66,6 @@
     <hr>
 <?php endwhile; */?> 
 
-</article>
     
 <?php
 // 以下は、データ接続の練習
