@@ -1,3 +1,5 @@
+<?php require('dbconnect.php') ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -15,14 +17,34 @@
 
 <main>
 <h2>practice</h2>
-<pre>
-<?php
-    try {
-        $db = new PDO('mysql:dbname=yokuwaka;host=localhost;charset=utf8', 'root', '');
-    } catch (PDOException $e) {
-        echo 'DB接続エラー：' . $e->getMessage();
-    }
+<article>
+
+<?php while ($memo = $memos->fetch()): ?> 
+    <?php if ((mb_strlen($memo['memo'])) > 50): ?>
+        <p><a href="memo.php?id=<?php echo $memo['id']; ?>"><?php echo mb_substr($memo['memo'], 0, 50); ?>...</a></p>
+    <?php else: ?>
+        <p><a href="memo.php?id=<?php echo $memo['id']; ?>"><?php echo $memo['memo']; ?></a></p>
+    <?php endif; ?>
+    <time><?php echo $memo['created_at']; ?></time>
+    <hr>
+<?php endwhile; ?>
+
+<!-- 以下は上記プログラミングを三項演算子で記述したもの -->
+<?php /*while ($memo = $memos->fetch()): ?> 
+    <p>
+        <a href="memo.php?id=<?php echo $memo['id']; ?>">
+        <?php echo mb_substr($memo['memo'], 0, 50); ?>
+        <?php echo (mb_strlen($memo['memo']) > 50 ? '...' : ''); ?>
+        </a>
+    </p>
+    <time><?php echo $memo['created_at']; ?></time>
+    <hr>
+<?php endwhile; */?> 
+
+</article>
     
+<?php
+// 以下は、データ接続の練習
     // $count = $db->exec('
     //     INSERT INTO
     //         my_items
@@ -52,20 +74,19 @@
 //             id=7
 // ');
 
-    $records = $db->query('SELECT * FROM my_items');
-    while ($record = $records->fetch()) {
-        echo $record['item_name'] . "\n";
-        echo $record['id'] . "\n";
-        echo $record['maker_id'] . "\n";
-        echo $record['sales'] . "\n";
-    }
+    // $records = $db->query('SELECT * FROM my_items');
+    // while ($record = $records->fetch()) {
+    //     echo $record['item_name'] . "\n";
+    //     echo $record['id'] . "\n";
+    //     echo $record['maker_id'] . "\n";
+    //     echo $record['sales'] . "\n";
+    // }
 
-    $records2 = $db->query('SELECT COUNT(*) AS record_count FROM my_items');
-    $record2 = $records2->fetch();
-    echo '件数は' . $record2['record_count'] . '件です';
+    // $records2 = $db->query('SELECT COUNT(*) AS record_count FROM my_items');
+    // $record2 = $records2->fetch();
+    // echo '件数は' . $record2['record_count'] . '件です';
+?>    
 
-?>
-</pre>
 </main>
 </body>
 </html>
