@@ -52,6 +52,18 @@
 //             id=7
 // ');
 
+    $records = $db->query('SELECT * FROM my_items');
+    while ($record = $records->fetch()) {
+        echo $record['item_name'] . "\n";
+        echo $record['id'] . "\n";
+        echo $record['maker_id'] . "\n";
+        echo $record['sales'] . "\n";
+    }
+
+    $records2 = $db->query('SELECT COUNT(*) AS record_count FROM my_items');
+    $record2 = $records2->fetch();
+    echo '件数は' . $record2['record_count'] . '件です';
+
 ?>
 </pre>
 </main>
