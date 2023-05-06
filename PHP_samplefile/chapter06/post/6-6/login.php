@@ -26,8 +26,8 @@ if (!empty($_POST)) {
 
 				// ログイン情報を記録する
 				if ($_POST['save'] == 'on') {
-				setcookie('email', $_POST['email'], time()+60*60*24*14);
-				setcookie('password', $_POST['password'], time()+60*60*24*14);
+				setcookie('email', $_POST['email'], time()+60*60*24*7);
+				setcookie('password', $_POST['password'], time()+60*60*24*7);
 				}
 
 				header('Location: index.php'); exit();
